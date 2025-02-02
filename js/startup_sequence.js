@@ -10,7 +10,7 @@ let startup_log1 = [
     [100, "Verification passed"],
     [300, "Connecting to C.I.O. 'OBSERVERS' repo..."],
     [800, "Connecting established"],
-    [100, "Scaning..."],
+    [100, "Scaning src/cio_obs..."],
     [600, "19840 new packages found"],
     [200, "Requesting 19840 packages"],
     [900, "Allocating storage space"],
