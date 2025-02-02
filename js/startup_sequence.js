@@ -50,7 +50,7 @@ let startup_log3 = [
     [30, "« Jaroslav    »"],
     [30, "« MisterGenri »"],
     [30, ""],
-    [30, "Entering graphic shell..."],
+    [700, "Entering graphic shell..."],
 ];
 
 function begin_startup_sequence() {
