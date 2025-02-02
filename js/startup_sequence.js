@@ -21,26 +21,26 @@ let startup_log2 = [
     [1000, "Executing..."],
 ];
 let startup_log3 = [
-    [1000, "███ ███ ███ ███ ███ ███ ███ ███ ███"],
-    [30, " █  █   █   █   █   █ █ █ █ █    █"],
-    [30, " █  ███ ███ ███ ███ ██  ███ █    █"],
-    [30, " █  █     █   █ █   █ █ █ █ █    █"],
-    [30, " █  ███ ███ ███ ███ █ █ █ █ ███  █"],
-    [30, "┌──────────────────────────────────┐"],
-    [30, "│                                  │"],
-    [30, "│ ░░░ ░ ░ ░░░     ░░░ ░░░ ░░░      │"],
-    [30, "│  ░  ░ ░ ░       ░ ░ ░ ░  ░       │"],
-    [30, "│  ░  ░░░ ░░░     ░░░ ░░   ░       │"],
-    [30, "│  ▒  ▒ ▒ ▒       ▒ ▒ ▒ ▒  ▒       │"],
-    [30, "│  ▒  ▒ ▒ ▒▒▒     ▒ ▒ ▒ ▒  ▒       │"],
-    [30, "│  ─  ─ ─ ───     ─ ─ ─ ─  ─       │"],
-    [30, "│  ▒▒▒ ▒▒▒ ▒▒▒ ▒ ▒                 │"],
-    [30, "│  ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓                 │"],
-    [30, "│  ▓▓  ▓ ▓ ▓ ▓ ▓▓                  │"],
-    [30, "│  █ █ █ █ █ █ █ █                 │"],
-    [30, "│  ███ ███ ███ █ █                 │"],
-    [30, "│  ─── ─── ─── ─ ─                 │"],
-    [30, "└──────────────────────────────────┘"],
+    [200, " ███ ███ ███ ███ ███ ███ ███ ███ ███"],
+    [30, "  █  █   █   █   █   █ █ █ █ █    █"],
+    [30, "  █  ███ ███ ███ ███ ██  ███ █    █"],
+    [30, "  █  █     █   █ █   █ █ █ █ █    █"],
+    [30, "  █  ███ ███ ███ ███ █ █ █ █ ███  █"],
+    [30, "┌───────────────────────────────────┐"],
+    [30, "│                                   │"],
+    [30, "│ ░░░ ░ ░ ░░░     ░░░ ░░░ ░░░       │"],
+    [30, "│  ░  ░ ░ ░       ░ ░ ░ ░  ░        │"],
+    [30, "│  ░  ░░░ ░░░     ░░░ ░░   ░        │"],
+    [30, "│  ▒  ▒ ▒ ▒       ▒ ▒ ▒ ▒  ▒        │"],
+    [30, "│  ▒  ▒ ▒ ▒▒▒     ▒ ▒ ▒ ▒  ▒        │"],
+    [30, "│  ─  ─ ─ ───     ─ ─ ─ ─  ─        │"],
+    [30, "│  ▒▒▒ ▒▒▒ ▒▒▒ ▒ ▒                  │"],
+    [30, "│  ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓                  │"],
+    [30, "│  ▓▓  ▓ ▓ ▓ ▓ ▓▓                   │"],
+    [30, "│  █ █ █ █ █ █ █ █                  │"],
+    [30, "│  ███ ███ ███ █ █                  │"],
+    [30, "│  ─── ─── ─── ─ ─                  │"],
+    [30, "└───────────────────────────────────┘"],
     [100, ""],
     [30, "BY"],
     [400, ""],
@@ -69,6 +69,11 @@ function begin_startup_sequence() {
         display_strokes_delayed(console, startup_log2);
     }, current_time);
     current_time += calc_time(startup_log2) + 1000;
+    step_delay = 10;
+    setTimeout(function() {
+        clear_strokes_delayed(console, step_delay);
+    }, current_time);
+    current_time += (startup_log2.length + startup_log3.length) * step_delay;
     setTimeout(function() {
         console.innerHTML = "";
         display_strokes_delayed(console, startup_log3);
@@ -102,6 +107,24 @@ function receiveng_packages_sequence(element, packages_count) {
         current_time += 1;
         setTimeout(function() {
             element.innerHTML = source_text + 'Downloading packages ' + (i + 2) + "/" + packages_count + "<br>";
+        }, current_time);
+    }
+}
+
+function clear_strokes_delayed(element, step_delay)
+{
+    let strokes = element.innerHTML.split("<br>");
+    let current_time = 0;
+    for (let x = 0; x < strokes.length; x++)
+    {
+        current_time += step_delay;
+        setTimeout(function() {
+            element.innerHTML = "";
+            for (let y = 0; y < strokes.length; y++)
+            {
+                element.innerHTML += strokes[y] + "<br>";
+            }
+            strokes[x] = "";
         }, current_time);
     }
 }
