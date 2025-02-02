@@ -1,0 +1,22 @@
+:root {
+    --bg-color: #252525;
+    --text-color: #AEAEAE;
+}
+
+@font-face {
+    font-family: "IBM BIOS";
+    src: url("../fonts/AcPlus_IBM_BIOS.ttf");
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: "IBM BIOS";
+}
+
+#main_console {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: "IBM BIOS";
+}
