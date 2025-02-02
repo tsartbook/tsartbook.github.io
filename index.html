@@ -12,7 +12,9 @@
     <script src="js/startup_sequence.js"></script>
     <title>Tesseract Art Book</title>
 </head>
-    <body onload="begin_startup_sequence()">
+    <body>
         <pre id="main_console"></pre>
+        <button id="begin_button" onclick="begin_startup_sequence()">BEGIN</button>
+        <audio id="startup_sound" src="sounds/Ts_start_1.webm" autoplay></audio>
     </body>
 </html>

@@ -1,16 +1,15 @@
 let startup_log1 = [
-    [100, " COPYRIGHT IDM COMPUTER SYSTEMS INC. 1990-1997"],
+    [10, " COPYRIGHT IDM COMPUTER SYSTEMS INC. 1990-1997"],
     [40, "           ---IDM BIOS ver. 1.5---"],
     [40, ""],
     [40, "          === C.I.O. 'OBSERVERS' ==="],
     [40, "    - 'ZASCHITIT' 'OBEZOPASIT' SOHRANIT' -"],
     [40, " "],
-    [300, "Loading domain"],
-    [300, "Checking internet connection status..."],
+    [6500, "Loading domain"],
+    [2000, "Checking internet connection status..."],
     [100, "Verification passed"],
     [300, "Connecting to C.I.O. 'OBSERVERS' repo..."],
     [800, "Connecting established"],
-    [300, "Moving to TESSERACT ART BOOK directory"],
     [100, "Scaning..."],
     [600, "19840 new packages found"],
     [200, "Requesting 19840 packages"],
@@ -54,6 +53,10 @@ let startup_log3 = [
 ];
 
 function begin_startup_sequence() {
+    document.getElementById("startup_sound").play();
+
+    document.getElementById("begin_button").remove();
+
     var console = document.getElementById("main_console");
     display_strokes_delayed(console, startup_log1);
     let current_time = calc_time(startup_log1);

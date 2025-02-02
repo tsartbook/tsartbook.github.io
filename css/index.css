@@ -11,12 +11,33 @@
 body {
     margin: 0;
     background-color: black;
-    color: white;
+    color: black;
     font-family: "IBM BIOS";
+    animation-delay: 2s;
+    animation-duration: 10s;
+    animation-name: fadein;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+    from {
+        color: black;
+    }
+    to {
+        color: white;
+    }
 }
 
 #main_console {
     margin-top: 10px;
     margin-left: 10px;
     font-family: "IBM BIOS";
+}
+
+#begin_button {
+    background: none;
+    color: white;
+    position: fixed;
+    left: calc(50% - 46px / 2);
 }
