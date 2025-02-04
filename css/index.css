@@ -39,5 +39,16 @@ body {
     background: none;
     color: white;
     position: fixed;
-    left: calc(50% - 46px / 2);
+    width: 100px;
+    left: calc(50% - 50px);
+    border: none;
+}
+
+#begin_button img {
+    width: 100%;
+    height: 100%;
+}
+
+#begin_button:active img {
+    content: url("../images/power_button_pressed.webp");
 }
