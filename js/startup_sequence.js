@@ -53,6 +53,18 @@ let startup_log3 = [
     [700, "Entering graphic shell..."],
 ];
 
+let lang_dialog_text = [
+    ["╔══════════════════════════════════════════╗"],
+    ["║ Tesseract Art Book                       ║"],
+    ["║──────────────────────────────────────────║"],
+    ["║                                          ║"],
+    ["║ Select the language to use in the shell: ║"],
+    ["║                                          ║"],
+    ["║──────────────────────────────────────────║"],
+    ["║    <button>ENG</button>                        <button>RUS</button>      ║"],
+    ["╚══════════════════════════════════════════╝"],
+]
+
 function begin_startup_sequence() {
     var console = document.createElement("pre");
     console.id = "main_console";
@@ -63,6 +75,8 @@ function begin_startup_sequence() {
     begin_button.disabled = true;
 
     document.getElementById("startup_sound").play();
+
+    const step_delay = 10;
 
     display_strokes_delayed_noline(console, startup_log1);
     let current_time = calc_time(startup_log1);
@@ -75,7 +89,6 @@ function begin_startup_sequence() {
         display_strokes_delayed(console, startup_log2);
     }, current_time);
     current_time += calc_time(startup_log2) + 1000;
-    step_delay = 10;
     setTimeout(function() {
         clear_strokes_delayed(console, step_delay);
     }, current_time);
@@ -83,6 +96,12 @@ function begin_startup_sequence() {
     setTimeout(function() {
         console.innerHTML = "";
         display_strokes_delayed(console, startup_log3);
+    }, current_time);
+    current_time += calc_time(startup_log3) + 400;
+    var lang_dialog_window = document.getElementById("lang_dialog_window");
+    setTimeout(function() {
+        document.getElementById("lang_dialog_wrapper").style.display = "block";
+        display_strokes_delayed_global(lang_dialog_window, lang_dialog_text, step_delay);
     }, current_time);
 }
 
@@ -102,6 +121,17 @@ function display_strokes_delayed(element, strokes)
         current_time += strokes[i][0];
         setTimeout(function() {
             element.innerHTML += strokes[i][1] + "<br>";
+        }, current_time);
+    }
+}
+
+function display_strokes_delayed_global(element, strokes, delay)
+{
+    let current_time = 0;
+    for (let i = 0; i < strokes.length; i++) {
+        current_time += delay;
+        setTimeout(function() {
+            element.innerHTML += strokes[i] + "<br>";
         }, current_time);
     }
 }
