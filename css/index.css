@@ -1,6 +1,7 @@
 :root {
     --bg-color: #252525;
     --text-color: #AEAEAE;
+    --clickable: #b53c3c;
 }
 
 @font-face {
@@ -98,7 +99,7 @@ body {
     border: none;
     padding: 0;
     width: 4em;
-    color: var(--text-color);
+    color: var(--clickable);
 }
 
 #lang_dialog_window button::before {
