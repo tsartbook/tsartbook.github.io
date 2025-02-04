@@ -65,6 +65,8 @@ let lang_dialog_text = [
     ["╚══════════════════════════════════════════╝"],
 ]
 
+let startup_sound = document.getElementById("startup_sound");
+
 function begin_startup_sequence() {
     var console = document.createElement("pre");
     console.id = "main_console";
@@ -74,7 +76,9 @@ function begin_startup_sequence() {
     begin_button.children[0].src = "images/power_button_pressed.webp";
     begin_button.disabled = true;
 
-    document.getElementById("startup_sound").play();
+    startup_sound = document.getElementById("startup_sound");
+    startup_sound.volume = 0.5;
+    startup_sound.play();
 
     const step_delay = 10;
 
