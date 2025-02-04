@@ -66,6 +66,7 @@ let lang_dialog_text = [
 ]
 
 let startup_sound = document.getElementById("startup_sound");
+let working_loop_sound = document.getElementById("working_loop_sound");
 
 function begin_startup_sequence() {
     var console = document.createElement("pre");
@@ -79,6 +80,9 @@ function begin_startup_sequence() {
     startup_sound = document.getElementById("startup_sound");
     startup_sound.volume = 0.5;
     startup_sound.play();
+    working_loop_sound = document.getElementById("working_loop_sound");
+    working_loop_sound.volume = 0.1;
+    working_loop_sound.play();
 
     const step_delay = 10;
 
