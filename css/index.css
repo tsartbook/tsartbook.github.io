@@ -15,12 +15,12 @@ body {
     font-family: "IBM BIOS";
     animation-delay: 2s;
     animation-duration: 10s;
-    animation-name: fadein;
+    animation-name: console_fadein;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
 }
 
-@keyframes fadein {
+@keyframes console_fadein {
     from {
         color: black;
     }
@@ -30,8 +30,12 @@ body {
 }
 
 #main_console {
-    margin-top: 10px;
-    margin-left: 10px;
+    position: absolute;
+    margin: 0;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    text-wrap: wrap;
     font-family: "IBM BIOS";
 }
 
@@ -40,8 +44,18 @@ body {
     color: white;
     position: fixed;
     width: 100px;
+    height: 100px;
     left: calc(50% - 50px);
     border: none;
+    padding: 0;
+}
+
+#begin_button:disabled {
+    animation-delay: 200ms;
+    animation-duration: 3s;
+    animation-name: power_button_fadeout;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
 
 #begin_button img {
@@ -49,6 +63,11 @@ body {
     height: 100%;
 }
 
-#begin_button:active img {
-    content: url("../images/power_button_pressed.webp");
+@keyframes power_button_fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }

@@ -58,9 +58,11 @@ function begin_startup_sequence() {
     console.id = "main_console";
     document.body.appendChild(console);
 
-    document.getElementById("startup_sound").play();
+    begin_button = document.getElementById("begin_button");
+    begin_button.children[0].src = "images/power_button_pressed.webp";
+    begin_button.disabled = true;
 
-    document.getElementById("begin_button").remove();
+    document.getElementById("startup_sound").play();
 
     display_strokes_delayed_noline(console, startup_log1);
     let current_time = calc_time(startup_log1);
