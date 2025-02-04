@@ -54,11 +54,14 @@ let startup_log3 = [
 ];
 
 function begin_startup_sequence() {
+    var console = document.createElement("pre");
+    console.id = "main_console";
+    document.body.appendChild(console);
+
     document.getElementById("startup_sound").play();
 
     document.getElementById("begin_button").remove();
 
-    var console = document.getElementById("main_console");
     display_strokes_delayed_noline(console, startup_log1);
     let current_time = calc_time(startup_log1);
     current_time += 1000;
