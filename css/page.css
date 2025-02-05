@@ -5,6 +5,7 @@ header {
     text-align: center;
     width: calc(100% - 40px);
     padding: 20px;
+    filter: blur(0.5px);
 }
 
 main {
@@ -21,12 +22,14 @@ footer {
     text-align: right;
     width: calc(100% - 40px);
     padding: 20px;
+    filter: blur(0.5px);
 }
 
 p {
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
+    filter: blur(0.5px);
 }
 
 .full_width_img {
@@ -52,7 +55,7 @@ p {
 .page {
     display: none;
     font-family: "IBM BIOS";
-    text-shadow: black 3px 3px;
+    text-shadow: black 3px 3px, rgba(255, 255, 255, 0.5) 0 0 8px;
 }
 
 .page_button {
@@ -64,6 +67,7 @@ p {
     text-shadow: black 3px 3px;
     color: var(--clickable);
     font-size: inherit;
+    text-shadow: black 3px 3px, rgba(255, 0, 0, 0.5) 0 0 8px;
 }
 
 .page_button:hover {
@@ -72,5 +76,5 @@ p {
 
 .page_button:active {
     color: transparent;
-    text-shadow: var(--clickable) 3px 3px;
+    text-shadow: var(--clickable) 3px 3px, rgba(255, 0, 0, 0.5) 3px 3px 8px;
 }
