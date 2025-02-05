@@ -62,7 +62,7 @@ let lang_dialog_text = [
     ["║ in the shell:              ║"],
     ["║                            ║"],
     ["║────────────────────────────║"],
-    ["║    <a href='eng'>ENG</a>        <a href='rus'>RUS</a>      ║"],
+    ["║    <button onclick='open_eng_page()'>ENG</button>         <button onclick='open_rus_page()'>RUS</button>      ║"],
     ["╚════════════════════════════╝"],
 ]
 
@@ -183,4 +183,21 @@ function clear_strokes_delayed(element, step_delay)
             strokes[x] = "";
         }, current_time);
     }
+}
+
+function open_eng_page()
+{
+    open_page();
+}
+
+function open_rus_page()
+{
+    open_page();
+}
+
+function open_page()
+{
+    document.getElementById("page").style.display = "block";
+    document.getElementById("lang_dialog_wrapper").style.display = "none";
+    clear_strokes_delayed(document.getElementById("main_console"), 10);
 }

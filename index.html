@@ -2,11 +2,10 @@
 <html lang="ru"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://tsartbook.github.io/images/icon.png">
     <link rel="icon" href="images/icon.png">
-    <link rel="stylesheet" href="https://tsartbook.github.io/styles/index.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/console.css">
+    <link rel="stylesheet" href="css/page.css">
     <script src="js/startup_sequence.js"></script>
     <title>Tesseract Art Book</title>
 </head>
@@ -18,6 +17,40 @@
             <div id="lang_dialog">
                 <pre id="lang_dialog_window"></pre>
             </div>
+        </div>
+
+        <div class="page" id="page">
+            <header>TESSERACT ART BOOK SHELL</header>
+            <main>
+                <img class="full_width_img">
+                <div class="separator"></div>
+                <div id="title_img_wrapper">
+                    <img class="full_width_img" src="images/title.svg">
+                </div>
+                <div class="separator"></div>
+                <p>
+                    В своем диалоге с Сократом Платон говорил: “Трудные времена рождают сильных людей. Сильные люди создают хорошие времена. Хорошие времена рождают слабых людей. Слабые люди создают трудные времена”.
+                </p>
+                <p>
+                    Бесконечный, незыблемый цикл, основанный на проявлениях человеческой натуры, повторяется с самого зарождения цивилизаций. Человечество прошло длинный путь от меча и арбалета до винтовок и пушек, научилось летать в воздухе подобно птицам, плавать в воде как рыбы, но, не сумев ужиться на земле, люди устроили громадную битву, которая поставила их перед чертой полного самоуничтожения.
+                </p>             
+                <p>
+                    Спустя сотни лет, племена, оставшиеся от былых цивилизаций, будут рассказывать легенды о далёких временах, называя тот период «Великой децимацией». Из уст в уста будет передаваться притча о грандиозном побоище тёмных и светлых армий, в конце которого, один из воинов тьмы убьёт своего предводителя и остановит кровопролитие, закрепив вечный мир.
+                </p>
+                <p>
+                    Тогда, почти сразу же после, кто-то, чьё сердце было наполнено добрыми намерениями, а разум - думами о будущем, открыл для людей новый путь развития, неизвестный ранее. Будто Данко, он повёл людей за собой. Невзирая на холод новых конфликтов на планете, он зажёг немало людей на борьбу с неравенством, несправедливостью и множеством расколов. Его идеи и открытия извращали остатки тёмных, но тщетно. В конечном итоге после усилий миллионов, катастрофа была неизбежна.
+                </p>
+                <p>
+                    «Самое обоюдоострое оружие в руках разумного вида – мысль» (Неизвестный воин тёмной армии)
+                </p>
+            </main>
+            <footer>
+                <button class="page_button" onclick="go_prev_page()">[ПРЕД.]</button>
+                <button class="page_button">[1]</button>
+                <button class="page_button">[2]</button>
+                <button class="page_button">[3]</button>
+                <button class="page_button" onclick="go_next_page()">[СЛЕД.]</button>
+            </footer>
         </div>
     </body>
 </html>

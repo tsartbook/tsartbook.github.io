@@ -77,21 +77,22 @@
     line-height: 1;
 }
 
-#lang_dialog_window a {
+#lang_dialog_window button {
     font-family: "IBM BIOS";
     text-decoration: none;
     text-shadow: black 3px 3px;
     line-height: 1;
+    width: 59.94px;
     background: none;
     border: none;
     padding: 0;
     color: var(--clickable);
 }
 
-#lang_dialog_window a::before {
+#lang_dialog_window button::before {
     content: "  ";
 }
 
-#lang_dialog_window a:hover:before {
+#lang_dialog_window button:hover:before {
     content: "► ";
 }
