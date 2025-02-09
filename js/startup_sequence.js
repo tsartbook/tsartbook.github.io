@@ -197,7 +197,16 @@ function open_rus_page()
 
 function open_page()
 {
-    document.getElementById("page").style.display = "block";
-    document.getElementById("lang_dialog_wrapper").style.display = "none";
-    clear_strokes_delayed(document.getElementById("main_console"), 10);
+    let current_time = 0
+    const step_delay = 10;
+    clear_strokes_delayed(document.getElementById("lang_dialog_window"), step_delay);
+    current_time += lang_dialog_text.length * step_delay;
+    setTimeout(function() {
+        document.getElementById("lang_dialog_wrapper").style.display = "none";
+        clear_strokes_delayed(document.getElementById("main_console"), step_delay);
+    }, current_time);
+    current_time += startup_log3.length * step_delay;
+    setTimeout(function() {
+        document.getElementById("page").style.display = "block";
+    }, current_time);
 }
