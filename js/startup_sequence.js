@@ -66,8 +66,8 @@ let lang_dialog_text = [
     ["╚════════════════════════════╝"],
 ]
 
-let startup_sound = document.getElementById("startup_sound");
-let working_loop_sound = document.getElementById("working_loop_sound");
+let startup_sound;
+let working_loop_sound;
 
 function begin_startup_sequence() {
     var console = document.createElement("pre");
