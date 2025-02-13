@@ -209,13 +209,43 @@ function open_page()
     setTimeout(function() {
         document.getElementById("main_console").style.display = "none";
         document.getElementById("page").style.display = "block";
+        write_page(page1, 300, 2);
     }, current_time);
+}
+
+function write_page(layout, step_delay, character_delay) {
+    let element = document.getElementById("page_main");
+    let current_time = 0;
+    for (let x = 0; x < layout.length; x++) {
+        current_time += step_delay;
+        if (layout[x][0] == false)
+        {
+            setTimeout(function() {
+                element.innerHTML += layout[x][1];
+            }, current_time);
+        }
+        else
+        {
+            setTimeout(function() {
+                let p = document.createElement("p");
+                element.appendChild(p);
+                let char_time = 0;
+                for (let y = 0; y < layout[x][1].length; y++) {
+                    char_time += character_delay;
+                    setTimeout(function() {
+                        p.innerHTML += layout[x][1].substring(y, y + 1);
+                    }, char_time);
+                }
+            }, current_time);
+            current_time += layout[x][1].length * character_delay + step_delay;
+        }
+    }
 }
 
 let page1 = [
     [false, "<img class='full_width_img'>"],
     [false, "<div class='separator'></div>"],
-    [false, "<div id='title_img_wrapper'>img class='full_width_img' src='images/title.svg'></div>"],
+    [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/title.svg'></div>"],
     [false, "<div class='separator'></div>"],
     [true, "В своем диалоге с Сократом Платон говорил: «Трудные времена рождают сильных людей. Сильные люди создают хорошие времена. Хорошие времена рождают слабых людей. Слабые люди создают трудные времена»."],
     [true, "Бесконечный, незыблемый цикл, основанный на проявлениях человеческой натуры, повторяется с самого зарождения цивилизаций. Человечество прошло длинный путь от меча и арбалета до винтовок и пушек, научилось летать в воздухе подобно птицам, плавать в воде как рыбы, но, не сумев ужиться на земле, люди устроили громадную битву, которая поставила их перед чертой полного самоуничтожения."],
