@@ -50,6 +50,7 @@ p {
     margin-top: 30px;
     margin-bottom: 30px;
     background-color: white;
+    box-shadow: white 0 0 8px;
 }
 
 .page {
@@ -84,4 +85,6 @@ p {
     font-size: 120px;
     color: #D81E1E;
     text-shadow: none;
+    filter: blur(0.5px);
+    text-shadow: black 3px 3px, #D81E1E94 0 0 8px;
 }
