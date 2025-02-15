@@ -296,21 +296,25 @@ function change_page(page_index)
         setTimeout(function ()
         {
             element.innerHTML += "<span class='page_red_title'>1</span>";
+            new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
             element.innerHTML += "<span class='page_red_title'>9</span>";
+            new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
             element.innerHTML += "<span class='page_red_title'>7</span>";
+            new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
             element.innerHTML += "<span class='page_red_title'>0</span>";
+            new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
     }
