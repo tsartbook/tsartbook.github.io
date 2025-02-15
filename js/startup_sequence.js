@@ -240,6 +240,10 @@ function write_page(layout, block_delay, character_delay) {
                     char_time += character_delay;
                     setTimeout(function() {
                         p.innerHTML += layout[x][1].substring(y, y + 1);
+                        if (y % 20 == 0)
+                        {
+                            new Audio("sounds/beep.mp3").play();
+                        }
                     }, char_time);
                 }
             }, current_time);
