@@ -78,3 +78,10 @@ p {
     color: transparent;
     text-shadow: var(--clickable) 3px 3px, rgba(255, 0, 0, 0.5) 3px 3px 8px;
 }
+
+.page_red_title {
+    font-family: Serati;
+    font-size: 120px;
+    color: #D81E1E;
+    text-shadow: none;
+}

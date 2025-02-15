@@ -9,6 +9,11 @@
     src: url("../fonts/AcPlus_IBM_BIOS.ttf");
 }
 
+@font-face {
+    font-family: "Serati";
+    src: url("../fonts/Serati.ttf");
+}
+
 body {
     margin: 0;
     background-color: black;

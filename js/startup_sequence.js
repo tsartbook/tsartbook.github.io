@@ -218,8 +218,7 @@ function open_page()
 }
 
 function write_page(layout, block_delay, character_delay) {
-    let footer = document.getElementsByTagName('footer')[0];
-    footer.style.display = "none";
+    disable_footer();
 
     let element = document.getElementById("page_main");
     let current_time = 0;
@@ -250,7 +249,7 @@ function write_page(layout, block_delay, character_delay) {
     
     setTimeout(function ()
     {
-        footer.style.display = "block";
+        enable_footer();
         update_footer();
     }, current_time + 1000);
 }
@@ -264,6 +263,16 @@ function update_footer()
     page_button_next.style.display = current_page == 1 ? "none" : "inline-block";
 }
 
+function disable_footer()
+{
+    document.getElementsByTagName('footer')[0].style.display = "none";
+}
+
+function enable_footer()
+{
+    document.getElementsByTagName('footer')[0].style.display = "block";
+}
+
 let current_page = 0;
 
 function change_page(page_index)
@@ -271,6 +280,7 @@ function change_page(page_index)
     let element = document.getElementById("page_main");
     let step_delay = 10;
     let current_time = 0;
+    disable_footer();
     for (let child of element.children)
     {
         current_time += step_delay;
@@ -279,10 +289,35 @@ function change_page(page_index)
             child.remove();
         }, current_time);
     }
+    current_time += 500;
+    if (page_index == 1)
+    {
+        let title_delay = 100;
+        setTimeout(function ()
+        {
+            element.innerHTML += "<span class='page_red_title'>1</span>";
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.innerHTML += "<span class='page_red_title'>9</span>";
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.innerHTML += "<span class='page_red_title'>7</span>";
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.innerHTML += "<span class='page_red_title'>0</span>";
+        }, current_time);
+        current_time += title_delay;
+    }
     setTimeout(function ()
     {
         write_page(pages_rus[page_index], page_block_delay, page_character_delay);
-    }, step_delay * pages_rus[current_page]);
+    }, current_time);
 
     current_page = page_index;
 }
@@ -310,7 +345,6 @@ let pages_rus = [
         [true, "«Самое обоюдоострое оружие в руках разумного вида – мысль» (неизвестный воин тёмной армии)"],
     ],
     [
-        [true, "1970"],
         [false, "<div class='separator'></div>"],
         [true, "70-е годы 20 века. Научный прогресс продвигается семимильными шагами, привнося в жизнь людей сотни изобретений и новшеств, которые ещё совсем недавно казались лишь бесплодными мечтами из фантастических книг Замятина и Герберта Уэллса. Уже второй раз за век во всех уголках земли был слышен взрыв, но если в первый раз, 20 июля 1944-го, это был портфель графа Штауффенберга, то 28 мая 1968 – уже грохот аплодисментов, оваций и бьющих на перебой друг другу новостных сводок."],
         [true, "Благодаря усилиям советского физика Николая Кардашёва человечество узнало о существовании ранее неизвестных пси-частиц - нового вида материи и энергии одновременно. В знак преемственности и дани памяти общему делу и развитию науки, частицы были названы в честь Льва Ландау, заложившего своими трудами почву для столь грандиозного открытия."],
