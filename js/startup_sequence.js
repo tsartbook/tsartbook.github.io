@@ -195,12 +195,16 @@ function open_rus_page()
     open_page();
 }
 
+let page_block_delay = 300;
+let page_character_delay = 2;
+
 function open_page()
 {
     let current_time = 0
     const step_delay = 10;
     clear_strokes_delayed(document.getElementById("lang_dialog_window"), step_delay);
     current_time += lang_dialog_text.length * step_delay;
+    document.body.style.overflowY = "scroll";
     setTimeout(function() {
         document.getElementById("lang_dialog_wrapper").style.display = "none";
         clear_strokes_delayed(document.getElementById("main_console"), step_delay);
@@ -209,15 +213,18 @@ function open_page()
     setTimeout(function() {
         document.getElementById("main_console").style.display = "none";
         document.getElementById("page").style.display = "block";
-        write_page(page1, 300, 2);
+        write_page(pages_rus[0], page_block_delay, page_character_delay);
     }, current_time);
 }
 
-function write_page(layout, step_delay, character_delay) {
+function write_page(layout, block_delay, character_delay) {
+    let footer = document.getElementsByTagName('footer')[0];
+    footer.style.display = "none";
+
     let element = document.getElementById("page_main");
     let current_time = 0;
     for (let x = 0; x < layout.length; x++) {
-        current_time += step_delay;
+        current_time += block_delay;
         if (layout[x][0] == false)
         {
             setTimeout(function() {
@@ -237,19 +244,75 @@ function write_page(layout, step_delay, character_delay) {
                     }, char_time);
                 }
             }, current_time);
-            current_time += layout[x][1].length * character_delay + step_delay;
+            current_time += layout[x][1].length * character_delay + block_delay;
         }
     }
+    
+    setTimeout(function ()
+    {
+        footer.style.display = "block";
+        update_footer();
+    }, current_time + 1000);
 }
 
-let page1 = [
-    [false, "<img class='full_width_img'>"],
-    [false, "<div class='separator'></div>"],
-    [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/title.svg'></div>"],
-    [false, "<div class='separator'></div>"],
-    [true, "В своем диалоге с Сократом Платон говорил: «Трудные времена рождают сильных людей. Сильные люди создают хорошие времена. Хорошие времена рождают слабых людей. Слабые люди создают трудные времена»."],
-    [true, "Бесконечный, незыблемый цикл, основанный на проявлениях человеческой натуры, повторяется с самого зарождения цивилизаций. Человечество прошло длинный путь от меча и арбалета до винтовок и пушек, научилось летать в воздухе подобно птицам, плавать в воде как рыбы, но, не сумев ужиться на земле, люди устроили громадную битву, которая поставила их перед чертой полного самоуничтожения."],
-    [true, "Спустя сотни лет, племена, оставшиеся от былых цивилизаций, будут рассказывать легенды о далёких временах, называя тот период «Великой децимацией». Из уст в уста будет передаваться притча о грандиозном побоище тёмных и светлых армий, в конце которого, один из воинов тьмы убьёт своего предводителя и остановит кровопролитие, закрепив вечный мир."],
-    [true, "Тогда, почти сразу же после, кто-то, чьё сердце было наполнено добрыми намерениями, а разум - думами о будущем, открыл для людей новый путь развития, неизвестный ранее. Будто Данко, он повёл людей за собой. Невзирая на холод новых конфликтов на планете, он зажёг немало людей на борьбу с неравенством, несправедливостью и множеством расколов. Его идеи и открытия извращали остатки тёмных, но тщетно. В конечном итоге после усилий миллионов, катастрофа была неизбежна."],
-    [true, "«Самое обоюдоострое оружие в руках разумного вида – мысль» (неизвестный воин тёмной армии)"],
-];
+function update_footer()
+{
+    let page_button_prev = document.getElementById("page_button_prev");
+    let page_button_next = document.getElementById("page_button_next");
+
+    page_button_prev.style.display = current_page == 0 ? "none" : "inline-block";
+    page_button_next.style.display = current_page == 1 ? "none" : "inline-block";
+}
+
+let current_page = 0;
+
+function change_page(page_index)
+{
+    let element = document.getElementById("page_main");
+    let step_delay = 10;
+    let current_time = 0;
+    for (let child of element.children)
+    {
+        current_time += step_delay;
+        setTimeout(function ()
+        {
+            child.remove();
+        }, current_time);
+    }
+    setTimeout(function ()
+    {
+        write_page(pages_rus[page_index], page_block_delay, page_character_delay);
+    }, step_delay * pages_rus[current_page]);
+
+    current_page = page_index;
+}
+
+function go_prev_page()
+{
+    change_page(current_page - 1);
+}
+
+function go_next_page()
+{
+    change_page(current_page + 1);
+}
+
+let pages_rus = [
+    [
+        [false, "<img class='full_width_img'>"],
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/title.svg'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "В своем диалоге с Сократом Платон говорил: «Трудные времена рождают сильных людей. Сильные люди создают хорошие времена. Хорошие времена рождают слабых людей. Слабые люди создают трудные времена»."],
+        [true, "Бесконечный, незыблемый цикл, основанный на проявлениях человеческой натуры, повторяется с самого зарождения цивилизаций. Человечество прошло длинный путь от меча и арбалета до винтовок и пушек, научилось летать в воздухе подобно птицам, плавать в воде как рыбы, но, не сумев ужиться на земле, люди устроили громадную битву, которая поставила их перед чертой полного самоуничтожения."],
+        [true, "Спустя сотни лет, племена, оставшиеся от былых цивилизаций, будут рассказывать легенды о далёких временах, называя тот период «Великой децимацией». Из уст в уста будет передаваться притча о грандиозном побоище тёмных и светлых армий, в конце которого, один из воинов тьмы убьёт своего предводителя и остановит кровопролитие, закрепив вечный мир."],
+        [true, "Тогда, почти сразу же после, кто-то, чьё сердце было наполнено добрыми намерениями, а разум - думами о будущем, открыл для людей новый путь развития, неизвестный ранее. Будто Данко, он повёл людей за собой. Невзирая на холод новых конфликтов на планете, он зажёг немало людей на борьбу с неравенством, несправедливостью и множеством расколов. Его идеи и открытия извращали остатки тёмных, но тщетно. В конечном итоге после усилий миллионов, катастрофа была неизбежна."],
+        [true, "«Самое обоюдоострое оружие в руках разумного вида – мысль» (неизвестный воин тёмной армии)"],
+    ],
+    [
+        [true, "1970"],
+        [false, "<div class='separator'></div>"],
+        [true, "70-е годы 20 века. Научный прогресс продвигается семимильными шагами, привнося в жизнь людей сотни изобретений и новшеств, которые ещё совсем недавно казались лишь бесплодными мечтами из фантастических книг Замятина и Герберта Уэллса. Уже второй раз за век во всех уголках земли был слышен взрыв, но если в первый раз, 20 июля 1944-го, это был портфель графа Штауффенберга, то 28 мая 1968 – уже грохот аплодисментов, оваций и бьющих на перебой друг другу новостных сводок. Благодаря усилиям советского физика Николая Кардашёва человечество узнало о существовании ранее неизвестных пси-частиц - нового вида материи и энергии одновременно. В знак преемственности и дани памяти общему делу и развитию науки, частицы были названы в честь Льва Ландау, заложившего своими трудами почву для столь грандиозного открытия. Всего за одно десятилетие люди познают глубины космоса, роботизацию, приближаются к созданию цифрового бессмертия. Не до конца оправившись от потрясений трёх десятков минувших лет, многие справедливо, с опаской и недоверием, смотрят в будущее, ожидая от него новых ударов из тьмы времени. Ведь чем больше сила – тем больше ответственность..."],
+        [false, "<div class='separator'></div>"],
+    ],
+]

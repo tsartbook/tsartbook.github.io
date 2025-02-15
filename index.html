@@ -45,11 +45,11 @@
                 </p> -->
             </main>
             <footer>
-                <button class="page_button" onclick="go_prev_page()">[ПРЕД.]</button>
-                <button class="page_button">[1]</button>
-                <button class="page_button">[2]</button>
-                <button class="page_button">[3]</button>
-                <button class="page_button" onclick="go_next_page()">[СЛЕД.]</button>
+                <button class="page_button" id="page_button_prev" onclick="go_prev_page()">[ПРЕД.]</button>
+                <button class="page_button" onclick="change_page(0)">[1]</button>
+                <button class="page_button" onclick="change_page(1)">[2]</button>
+                <button class="page_button" onclick="change_page(2)">[3]</button>
+                <button class="page_button" id="page_button_next" onclick="go_next_page()">[СЛЕД.]</button>
             </footer>
         </div>
     </body>
