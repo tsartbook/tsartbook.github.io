@@ -36,7 +36,64 @@ p {
     margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
-    min-height: 50px;
+    clip-path: rect(0% 100% 100% 0%);
+    filter: saturate(1);
+
+    animation-duration: 3s;
+    animation-name: full_width_img_load;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes full_width_img_load {
+    from {
+        clip-path: rect(0% 100% 0% 0%);
+        filter: saturate(0);
+    }
+    5% {
+        clip-path: rect(0% 100% 5% 0%);
+    }
+    20% {
+        clip-path: rect(0% 100% 5% 0%);
+    }
+    24% {
+        clip-path: rect(0% 100% 13% 0%);
+    }
+    28% {
+        clip-path: rect(0% 100% 13% 0%);
+    }
+    30% {
+        clip-path: rect(0% 100% 20% 0%);
+        filter: saturate(0);
+    }
+    48% {
+        clip-path: rect(0% 100% 20% 0%);
+    }
+    50% {
+        clip-path: rect(0% 100% 60% 0%);
+    }
+    64% {
+        clip-path: rect(0% 100% 60% 0%);
+    }
+    70% {
+        clip-path: rect(0% 100% 70% 0%);
+    }
+    87% {
+        clip-path: rect(0% 100% 70% 0%);
+    }
+    90% {
+        clip-path: rect(0% 100% 80% 0%);
+    }
+    92% {
+        clip-path: rect(0% 100% 90% 0%);
+    }
+    99% {
+        clip-path: rect(0% 100% 90% 0%);
+    }
+    to {
+        clip-path: rect(0% 100% 100% 0%);
+        filter: saturate(1);
+    }
 }
 
 #title_img_wrapper {

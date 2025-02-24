@@ -69,6 +69,25 @@ let lang_dialog_text = [
 let startup_sound;
 let working_loop_sound;
 
+if (window.location.hash == "#page")
+{
+    setTimeout(function() {
+        document.getElementById("begin_button").remove();
+        
+        let current_time = 0
+        const step_delay = 10;
+        document.body.style.overflowY = "scroll";
+        setTimeout(function() {
+            document.getElementById("lang_dialog_wrapper").style.display = "none";
+        }, current_time);
+        current_time += startup_log3.length * step_delay;
+        setTimeout(function() {
+            document.getElementById("page").style.display = "block";
+            write_page(pages_rus[0], page_block_delay, page_character_delay);
+        }, current_time);
+    }, 10);
+}
+
 function begin_startup_sequence() {
     var console = document.createElement("pre");
     console.id = "main_console";
@@ -227,8 +246,12 @@ function write_page(layout, block_delay, character_delay) {
         if (layout[x][0] == false)
         {
             setTimeout(function() {
-                element.innerHTML += layout[x][1];
+                element.insertAdjacentHTML("beforeend", layout[x][1]);
             }, current_time);
+            if (layout[x][1].includes("full_width_img"))
+            {
+                current_time += 3000;
+            }
         }
         else
         {
@@ -342,7 +365,7 @@ function go_next_page()
 
 let pages_rus = [
     [
-        [false, "<img class='full_width_img'>"],
+        [false, "<div class='full_width_img_wrapper'><img class='full_width_img' src='images/cover.png'></div>"],
         [false, "<div class='separator'></div>"],
         [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/title.svg'></div>"],
         [false, "<div class='separator'></div>"],
