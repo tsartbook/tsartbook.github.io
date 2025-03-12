@@ -256,6 +256,10 @@ function write_page(layout, block_delay, character_delay) {
         {
             setTimeout(function() {
                 element.insertAdjacentHTML("beforeend", layout[x][1]);
+                if (layout[x][1].includes("full_width_img"))
+                {
+                    new Audio("sounds/ts_print.mp3").play();
+                }
             }, current_time);
             if (layout[x][1].includes("full_width_img"))
             {
@@ -296,7 +300,7 @@ function update_footer()
     let page_button_next = document.getElementById("page_button_next");
 
     page_button_prev.style.display = current_page == 0 ? "none" : "inline-block";
-    page_button_next.style.display = current_page == 1 ? "none" : "inline-block";
+    page_button_next.style.display = current_page == pages_rus.length - 1 ? "none" : "inline-block";
 }
 
 function disable_footer()
@@ -331,25 +335,53 @@ function change_page(page_index)
         let title_delay = 100;
         setTimeout(function ()
         {
-            element.innerHTML += "<span class='page_red_title'>1</span>";
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>1</span>");
             new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
-            element.innerHTML += "<span class='page_red_title'>9</span>";
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>9</span>");
             new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
-            element.innerHTML += "<span class='page_red_title'>7</span>";
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>7</span>");
             new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
         setTimeout(function ()
         {
-            element.innerHTML += "<span class='page_red_title'>0</span>";
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>2</span>");
+            new Audio("sounds/beep.mp3").play();
+        }, current_time);
+        current_time += title_delay;
+    }
+    if (page_index == 2)
+    {
+        let title_delay = 100;
+        setTimeout(function ()
+        {
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>1</span>");
+            new Audio("sounds/beep.mp3").play();
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>9</span>");
+            new Audio("sounds/beep.mp3").play();
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>8</span>");
+            new Audio("sounds/beep.mp3").play();
+        }, current_time);
+        current_time += title_delay;
+        setTimeout(function ()
+        {
+            element.insertAdjacentHTML("beforeend", "<span class='page_red_title'>4</span>");
             new Audio("sounds/beep.mp3").play();
         }, current_time);
         current_time += title_delay;
@@ -386,9 +418,18 @@ let pages_rus = [
     ],
     [
         [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page1.png'></div>"],
+        [false, "<div class='separator'></div>"],
         [true, "70-е годы 20 века. Научный прогресс продвигается семимильными шагами, привнося в жизнь людей сотни изобретений и новшеств, которые ещё совсем недавно казались лишь бесплодными мечтами из фантастических книг Замятина и Герберта Уэллса. Уже второй раз за век во всех уголках земли был слышен взрыв, но если в первый раз, 20 июля 1944-го, это был портфель графа Штауффенберга, то 28 мая 1968 – уже грохот аплодисментов, оваций и бьющих на перебой друг другу новостных сводок."],
         [true, "Благодаря усилиям советского физика Николая Кардашёва человечество узнало о существовании ранее неизвестных пси-частиц - нового вида материи и энергии одновременно. В знак преемственности и дани памяти общему делу и развитию науки, частицы были названы в честь Льва Ландау, заложившего своими трудами почву для столь грандиозного открытия."],
         [true, "Всего за одно десятилетие люди познают глубины космоса, роботизацию, приближаются к созданию цифрового бессмертия. Не до конца оправившись от потрясений трёх десятков минувших лет, многие справедливо, с опаской и недоверием, смотрят в будущее, ожидая от него новых ударов из тьмы времени. Ведь чем больше сила – тем больше ответственность..."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page2.png'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "Закрытая Международная Организация “Наблюдатели” была учреждена в 1974-ом году на очередном заседании Совета Безопасности ООН. Основной целью создания Организации, провозглашенной во время выступления авторами инициативы Юрием Гагариным и графом Штауффенбергом, стало противостояние нарастающей угрозе корпоративных гигантов в лице Matsushita Manufactorum, IDM и прочих, которые стали постепенно превосходить многие (и далеко не всегда отстающие) государства, обгоняя их по экономическим и научно-техническим параметрам. Иными словами — “Наблюдатели” должны саботировать деятельность новой формы власти для сохранения веками формировавшихся устоев старой. Получив финансирование и особую юрисдикцию на своих территориях от СССР и США, в последующие годы ЗМО успешно осуществляла свою миссию, инфильтрируясь в ряды корпоративных элит и незаметно вызывая значительные проблемы в их деятельности. Организация также не брезговала пачкать руки, осуществляя спецоперации с применением летальной силы и вступая в открытые конфронтации с наемниками.Вместе с тем, “Наблюдатели” активно занимались разработками, связанными с Л-частицами, проводя исследования на базе Советских НИИ и собственных комплексов, расположенных на побережье Средиземного моря, параллельно устраняя любую деятельность в этой области за пределами Организации. Таким образом, ЗМО удалось стать лидером в теории и практическом использовании частиц Ландау и их энергии."],
         [false, "<div class='separator'></div>"],
     ],
 ]
