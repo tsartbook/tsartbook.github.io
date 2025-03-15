@@ -243,6 +243,8 @@ function open_page()
         document.getElementById("page").style.display = "block";
         write_page(pages_rus[0], page_block_delay, page_character_delay);
     }, current_time);
+    
+    reset_auto_scroll();
 }
 
 function write_page(layout, block_delay, character_delay) {
