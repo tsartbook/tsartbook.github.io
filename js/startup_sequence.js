@@ -292,7 +292,7 @@ function write_page(layout, block_delay, character_delay) {
 
 let auto_scroll = true;
 let auto_scroll_reset = true;
-let auto_scroll_reset_time = 3000;
+let auto_scroll_reset_time = 1000;
 function scrollToEnd()
 {
     if (auto_scroll)
