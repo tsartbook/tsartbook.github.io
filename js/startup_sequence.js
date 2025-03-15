@@ -78,25 +78,6 @@ let lang_dialog_text = [
 let startup_sound;
 let working_loop_sound;
 
-if (window.location.hash == "#page")
-{
-    setTimeout(function() {
-        document.getElementById("begin_button").remove();
-        
-        let current_time = 0
-        const step_delay = 10;
-        document.body.style.overflowY = "scroll";
-        setTimeout(function() {
-            document.getElementById("lang_dialog_wrapper").style.display = "none";
-        }, current_time);
-        current_time += startup_log3.length * step_delay;
-        setTimeout(function() {
-            document.getElementById("page").style.display = "block";
-            write_page(pages_rus[0], page_block_delay, page_character_delay);
-        }, current_time);
-    }, 10);
-}
-
 function begin_startup_sequence() {
     var console = document.createElement("pre");
     console.id = "main_console";
@@ -215,18 +196,22 @@ function clear_strokes_delayed(element, step_delay)
 
 function open_eng_page()
 {
-    open_page();
+    current_pages = pages_eng;
+    current_language = "eng";
+    open_page(pages_eng[0]);
 }
 
 function open_rus_page()
 {
-    open_page();
+    current_pages = pages_rus;
+    current_language = "rus";
+    open_page(pages_rus[0]);
 }
 
 let page_block_delay = 300;
 let page_character_delay = 2;
 
-function open_page()
+function open_page(page)
 {
     let current_time = 0
     const step_delay = 10;
@@ -241,7 +226,8 @@ function open_page()
     setTimeout(function() {
         document.getElementById("main_console").style.display = "none";
         document.getElementById("page").style.display = "block";
-        write_page(pages_rus[0], page_block_delay, page_character_delay);
+        write_page(page, page_block_delay, page_character_delay);
+        translate_footer();
     }, current_time);
     
     reset_auto_scroll();
@@ -376,6 +362,23 @@ function enable_footer()
     scrollToEnd();
 }
 
+function translate_footer()
+{
+    let page_button_prev = document.getElementById("page_button_prev");
+    let page_button_next = document.getElementById("page_button_next");
+
+    if (current_language == "eng")
+    {
+        page_button_prev.textContent = "[PREV]";
+        page_button_next.textContent = "[NEXT]";
+    }
+    if (current_language == "rus")
+    {
+        page_button_prev.textContent = "[ПРЕД.]";
+        page_button_next.textContent = "[СЛЕД.]";
+    }
+}
+
 let current_page = 0;
 
 function change_page(page_index)
@@ -452,9 +455,11 @@ function change_page(page_index)
     }
     setTimeout(function ()
     {
-        write_page(pages_rus[page_index], page_block_delay, page_character_delay);
+        write_page(current_pages[page_index], page_block_delay, page_character_delay);
     }, current_time);
 
+    document.getElementById("page_number_button" + (current_page + 1)).classList.remove("page_button_active");
+    document.getElementById("page_number_button" + (page_index + 1)).classList.add("page_button_active");
     current_page = page_index;
 }
 
@@ -467,6 +472,8 @@ function go_next_page()
 {
     change_page(current_page + 1);
 }
+
+let current_pages;
 
 let pages_rus = [
     [
@@ -593,3 +600,133 @@ let pages_rus = [
         [false, "<div class='separator'></div>"],
     ],
 ]
+
+// ENGLISH PAGE BELOW
+//
+// ENGLISH PAGE BELOW
+
+pages_eng = [
+    [
+        [false, "<div class='full_width_img_wrapper'><img class='full_width_img' src='images/cover.png'></div>"],
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/title.svg'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "..."],
+        [true, "..."],
+        [true, "..."],
+        [true, "..."],
+        [true, "..."],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page1_eng.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "..."],
+        [true, "..."],
+        [true, "..."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page2_eng.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "The Closed International Organization “Observers” was founded in 1974 during the UN Security Council meeting. The main reason behind the creation of the Organization stated during the speech given by the Yuri Gagarin and Graf von Stauffenberg, who were the initiators of the initiative, was oppression to the corporate giants, such as Matsushita Manufactorum, IDM and etc., which slowly began to surpass many governments in different aspects of the economics and technical potential, putting an old, long lasting world order to danger. In other words, CIO must sabotage the new order to save the old one. The Organization was established, and was given finances by the USSR and the US, both of which also provided it a special status and extended power on their territory. In the following years, CIO was successfully accomplishing its mission by infiltrating into the high ranks corpos and causing significant problems to their activity while remaining relatively unnoticed. The Organization also wasn’t struggling to get their hands dirty, using lethal force during the special operations and engaging into gunfights with mercenaries. Besides that, “Observers” were actively developing techs based on Landau particles, using Soviet universities and their own facilities on the coast of the Mediterranean sea as the research bases, while also neutralizing any competition in this field. Therefore, CIO managed to become the leader in the theory and practical usage of L-particles and its energy."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page3.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "The devastating fall of the Japanese Empire during the operation “Downfall” had massive consequences for the entire region and the world in general. On the endless flats of the nuclear dust, on the ruins of the cities and island villages, there was peace for Japan. But for "],
+        [true, "China, the end of the war with an outside enemy only meant the continuation of another war— the domestic one. In a short time, Guomindang led by Chiang Kai-shek defeated communists, which, to many’s surprise, were later refused by Stalin in an earlier occupied by Red Army Manchuria and Xinjiang."],
+        [true, "Perhaps if it wasn’t for the August crisis of 1947 in Europe the Soviet government would give up territories to China, but at the end, the final conference between two countries planned on September 1st, 1947 was canceled. Stalin decided to keep the important bridgehead for himself. According to the Harbin agreement of 1949, these territories as well as Mongolia were recognized as the Soviet Republic. During the summer of 1960 there were military exercises of the Moscow Agreement Organization, during which the demilitarized zone at the Chinese border stopped existing and the new line of demarcation was set."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page4.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "«The Progress 70» was the first international exhibition dedicated to the L-particles energy and Solranium, which took place in Vladivostok from March 1st to April 15th of 1970. A huge number of guests were invited from all over the world: scientists, journalists, politicians and even militaries (last ones were only from the friendly to the Soviet countries). The initiator of the whole thing was no one else but Nikolai Kardashev himself — at the moment just the rising star for an entire science community. The Soviet side demonstrated many techs and discoveries made by them recently. Besides that, bionic augmentations, L-batteries and mobile communication devices were demonstrated to the public. "],
+        [true, "On the photo back to the camera — Chief of General Staff of the German Army, Col. Gen. H. Krebs (on the right), Major of the German Army Armored Forces [CLASSIFIED] (on the left)."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page5.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "Solranium (from lat. “Sol” - the sun) is an extraterrestrial metal, brought to the Earth during the Late Heavy Bombardment. It was unknown to humanity for a long period of time due to how deep it lies and how far it is from the mining areas. In the rare cases of it being found it was mistaken for different, already known metals such as Lithium because of its visual similarity. The largest deposit was found by a group of geologists at the bottom of the Baikal lake in July of 1971 during the construction of one of the project “Bellerofont” structures.  After a further examination of the samples brought up from the water, scientists discovered its significant differences from common known metals, out of which the core one was L-particles resistance. Because of its shine, lightness, high heat capacity and color changing abilities at higher temperatures it was called Solranium, and was later used widely as the protection from Landau particles radiation."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page6.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "Landau particles' effects on the human body were known ever since their discovery — Arkat’s syndrome and its terrible consequences in particular. Usually these consequences were caused by an ample L-radiation level, which only occurred during the incidents related to the safety technology violations. The effects of the long, dosed exposure weren’t discovered until the second half of 1980s. Accumulating in a human body, Landau particles began to slowly change human physiology without being fatal, unlike “Arkat”. They affected the tissues structure and brain activity, interrupting neurons’ activity and altering the signals sent by them. Person’s behavior was changing — they gained paranoia, became isolated, their speech disordered. Individuals were slowly losing their sanity, eventually leaving society by walking away from civilization. In remote areas they met with people who shared similar symptoms and united with them into small groups, clans, and sometimes even in huge communities. They all had the same distinctive feature — obsession with L-particles. They were exposing themselves to them through any available source — batteries, power generators, power cells etc, all while the process of physical changes was speeding up. Soon, the phenomenon became known to the public, “lesion of higher nervous system functions on the background of abundant Landau radiation” was nicknamed as “Obsession”."],
+        [true, "On the photo — failed attempt to breach the perimeter of the Restricted Area in Norway by a group of “Obsessed”, 1998."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page7.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "Some say that just one man in the right place can make all the difference in the world. Claus Philipp Maria Justinian Schenk Graf von Stauffenberg is a great example of this. His whole life consisted of endless fights and resistance, upholding the good name for not just him and his family, but for all German people. No one has seen a future German officer in a young boy from a rich aristocratic family. He could have spent hours gazing at the nature around him, playing music or reading poems. The only part of him that didn't correlate to his calm behavior was his desperate, sometimes even stubborn bravery, that he will keep with him though his entire life. He will get a great education in gymnasium, make a lot of friends and in 1926 will go to the army. Soon he will explain his decision by his eagerness for action and his wish to serve his country. Because of the family’s tradition, his father supported his actions. Roaring 20s soon changed to dark 30s. Young Stauffenberg, stupefied by the ideas of the revival of German glory, will often speak for the ideas of the Führer. But with the beginning of the war we’ll get to see Hitlerism at practice. When Poland and France were left behind, the fire of the battle flamed at the East, where the last illusions of Hitler’s true intentions faded away from the officer’s head. At a conference in Vinnytsia in October of 1942 Shtaffumberg strongly condemned German eastern policy and claimed that Germany is flaming the hate in Russia that “someday will have its revenge on our children”. The lack of perspective in a war with the USSR, horrible actions of his comrades and a failure to efficiently command military operations by OKW and OKH made Shtaffumberg a man that went down in history. As a problematic figure for the leadership, he went to North Africa, where on April 7th, 1943 during the British air raid he was heavily injured. Losing his left eye, right hand, two fingers on the left hand and with a severe head injury he spent three months in Munich, where he was cured by professor Ferdinand Sauerbruch. During the additional surgeries on a knee joint and a middle ear he refused to take painkillers, and learned to write with his left hand. A few people would stay in the army after all that happened, but the colonel decided that the way for him to save the German nation and government was by going up the career ladder in the HQ… After two and a half years of preparations, organization of his own patriotic wing, his briefcase with the bomb exploded right where it was supposed to."],
+        [true, "And after another quarter of the century, Shtaffumberg and the first man in space Yuri Gagarin will announce the creation of CIO “Observers”."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page8.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "“Dear Gunter Venadyevich, "],
+        [true, "I’m sending you the gift, which is an individual that gave you this letter. Please don’t take it as a familiarity. I understand how unusual it is to hear such words from me, but the changes that have happened since our last meeting are favorable to this. Everything you read here must stay confidential."],
+        [true, "The one who gave you this letter was acknowledged as a not promising “sample” of a “Kiteh” project about a month ago, and now sent by me to a safe place away from unnecessary attention — to you in Solnechnogorsk. This person does not know your name, and is sent to his grandfather in the countryside. There are two attendants with him. Mister A. is in a great health, Miss M is quite bored (can’t imagine how much more bored she must be when she arrives!), so please don’t bother her with anything, especially questions, so the incident that happened last time won’t happen again (!!!)."],
+        [true, "Also the photo is attached. Remove the duct tape after acquiring it."],
+        [true, "Always yours,"],
+        [true, "Lev Landau.”"],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page9.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "On April 10th, 1990 in Tokyo the 7th CIO “Observers” conference occurred, on which the main topic was a complete destruction of a “megacoprorate three” — IDM, Farben and Matsushita Manufactorum."],
+        [true, "A week before CIO agents successfully cleared up the last offices of the conglomerates and claimed their end, so soon enough the conference turned to celebration. Once a rising star of science Nikolai Kardashev seemed more and more like a fading nebula. A man who discovered the power of Landau particles, invented many augmentations that people could only dream of in science fiction books and made it possible for a digital immortality at the end declined all this. Many were confused by his decision, but no one tried to make him reconsider, hoping that the scientist is looking for a successor. For the first time he appeared in public in a ceremonial Observers uniform, explaining this as a “sign of respect for everyone who came to this honorable occasion”."],
+        [true, "No one knew that it was the last appearance of him like this and the last celebration for CIO as well..."],
+        [false, "<div class='separator'></div>"],
+    ],
+    [
+        [false, "<div class='separator'></div>"],
+        [false, "<div id='title_img_wrapper'><img class='full_width_img' src='images/page10.webp'></div>"],
+        [false, "<div class='separator'></div>"],
+        [true, "Victor Pelsh — CIO agent, currently staged at “Foxtrot” outpost in the Norwegian Restricted Area."],
+        [true, "Was born on September 27th, 1976 in a town called Elektrenai, Lithuanian SSR. Lived in a full family. At the age of 18 was drafted to the Soviet Army, where began his military career in VDV. After the operation “Groza” began he was sent to Israel as a part of the Soviet contingent of International Counter-Terrorist Forces, taking part in many ground operations. During the diversion operation led by Leonid Lebedev was a witness of the HPLFW(E) (High Power Landau Field Warper (Experimental) activation, after which he and his comrades were heavily injured due to the extreme L-radiation level. Later they were found by CIO recon squad and evacuated to the “Whiskey-Freedom” outpost. Against all the expectations, Victor successfully recovered and was later questioned by the agent █████, who was very impressed by the young man. Later on he interviewed Pelsh, after which Victor signed up the contract with the Organization and began his duty as an agent."],
+        [false, "<div class='separator'></div>"],
+    ],
+]
+
+if (window.location.hash.slice(0, 5) == "#page")
+{
+    current_pages = pages_eng;
+    current_language = "eng";
+    if (window.location.hash == "#page_rus")
+    {
+        current_pages = pages_rus;
+        current_language = "rus";
+    }
+    setTimeout(function() {
+        document.getElementById("begin_button").remove();
+        
+        let current_time = 0
+        const step_delay = 10;
+        document.body.style.overflowY = "scroll";
+        setTimeout(function() {
+            document.getElementById("lang_dialog_wrapper").style.display = "none";
+        }, current_time);
+        current_time += startup_log3.length * step_delay;
+        setTimeout(function() {
+            document.getElementById("page").style.display = "block";
+            write_page(current_pages[0], page_block_delay, page_character_delay);
+            translate_footer();
+        }, current_time);
+    }, 10);
+}
