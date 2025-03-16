@@ -138,8 +138,12 @@ p {
 }
 
 .page_button_active {
-    color: white;
+    color: var(--text-color);
     text-shadow: black 3px 3px, rgba(255, 255, 255, 0.5) 0 0 8px;
+}
+.page_button_active:active {
+    color: transparent;
+    text-shadow: var(--text-color) 3px 3px, rgba(255, 255, 255, 0.5) 3px 3px 8px;
 }
 
 .page_red_title {
