@@ -708,10 +708,12 @@ function build_pages()
 {
     for (let i = 0; i < 1; i++)
     {
+        let lines;
         console.log(window.location.href.replace("index.html", "") + "js/page" + i + ".txt");
         fetch(window.location.href.replace("index.html", "") + "js/page" + i + ".txt")
         .then( response => response.text() )
-        .then( text => console.log(text) );
+        .then( text => lines = text.split("\n") );
+        console.log(lines)
     }
 }
 
