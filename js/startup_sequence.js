@@ -711,8 +711,10 @@ function build_pages()
         let lines;
         console.log(window.location.href.replace("index.html", "") + "js/page" + i + ".txt");
         fetch(window.location.href.replace("index.html", "") + "js/page" + i + ".txt")
-        .then( response => response.text() )
-        .then( text => lines = text.split("\n") );
+        .then(response => response.text())
+        .then(text => {
+            lines = text.split("\n")
+        });
         console.log(lines)
     }
 }
